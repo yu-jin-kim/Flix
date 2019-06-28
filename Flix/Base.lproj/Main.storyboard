@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--Now Playing-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesViewController" sceneMemberID="viewController">
@@ -74,9 +74,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="E7m-VA-cc3"/>
+                    <navigationItem key="navigationItem" title="Now Playing" id="E7m-VA-cc3"/>
                     <connections>
                         <outlet property="activityIndicator" destination="Sja-b8-PjH" id="hcv-Vg-zkQ"/>
+                        <outlet property="navigationItem" destination="E7m-VA-cc3" id="mLE-v9-iQj"/>
                         <outlet property="tableView" destination="JGj-y6-lAy" id="xqn-0B-IUq"/>
                     </connections>
                 </viewController>
@@ -84,7 +85,7 @@
             </objects>
             <point key="canvasLocation" x="32.5" y="1851.3599999999999"/>
         </scene>
-        <!--Search Movies-->
+        <!--Search-->
         <scene sceneID="YuG-hx-SRA">
             <objects>
                 <viewController id="net-hg-ezm" customClass="MoviesGridViewController" sceneMemberID="viewController">
@@ -136,10 +137,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Search Movies" id="j1e-qu-hl8"/>
+                    <navigationItem key="navigationItem" title="Search" id="j1e-qu-hl8"/>
                     <connections>
                         <outlet property="activityIndicator" destination="riu-Oc-Ldp" id="TCh-UE-hLe"/>
                         <outlet property="collectionView" destination="5PE-nT-mXz" id="WOU-Sa-Ro2"/>
+                        <outlet property="navigationItem" destination="j1e-qu-hl8" id="hEP-cQ-1pC"/>
                         <outlet property="searchBar" destination="FI4-nv-1vM" id="chv-WH-qqe"/>
                     </connections>
                 </viewController>
@@ -182,7 +184,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r7c-sy-M1o">
-                                        <rect key="frame" x="158" y="260" width="217" height="61"/>
+                                        <rect key="frame" x="150" y="225" width="217" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -195,10 +197,25 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="oex-xm-jfy">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="oex-xm-jfy">
                                         <rect key="frame" x="8" y="154" width="134" height="201"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iVN-N9-X92">
+                                        <rect key="frame" x="8" y="154" width="134" height="201"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="buttonTriggered:" destination="rur-SS-uvj" eventType="primaryActionTriggered" id="hfo-a9-dV5"/>
+                                            <segue destination="TuR-QN-U1E" kind="modal" identifier="firstSegue" id="dVW-cI-XUu"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dbR-Fl-Z1f">
+                                        <rect key="frame" x="150" y="308" width="217" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </scrollView>
@@ -208,6 +225,8 @@
                     <navigationItem key="navigationItem" id="h5l-hg-dxR"/>
                     <connections>
                         <outlet property="backDrop" destination="34N-Sy-jAf" id="gQN-6a-Adi"/>
+                        <outlet property="dateLabel" destination="dbR-Fl-Z1f" id="0dB-Is-wCW"/>
+                        <outlet property="posterButton" destination="iVN-N9-X92" id="7RN-U9-0DG"/>
                         <outlet property="posterOverlay" destination="oex-xm-jfy" id="ag1-cH-rZl"/>
                         <outlet property="synopsis" destination="igE-y7-o3e" id="Tu3-LO-b9K"/>
                         <outlet property="titleLabel" destination="r7c-sy-M1o" id="5de-uo-bcu"/>
@@ -215,7 +234,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a96-TL-Inp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="415" y="2908"/>
+            <point key="canvasLocation" x="413.60000000000002" y="2907.6354679802957"/>
+        </scene>
+        <!--Trailer View Controller-->
+        <scene sceneID="XFq-Wi-XGo">
+            <objects>
+                <viewController storyboardIdentifier="WebVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TuR-QN-U1E" customClass="TrailerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="naz-l7-ENh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" id="bhW-Qi-A9H">
+                                <rect key="frame" x="0.0" y="44" width="375" height="720"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="udR-7u-vis">
+                                <rect key="frame" x="0.0" y="761" width="375" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backButton:" destination="TuR-QN-U1E" eventType="touchUpInside" id="dfS-MK-tbL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="udR-7u-vis" id="bAX-OB-JJm"/>
+                        <outlet property="webView" destination="bhW-Qi-A9H" id="PId-jq-si1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XBH-vw-ylj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1462" y="2908"/>
         </scene>
         <!--Now Playing-->
         <scene sceneID="nUz-y0-o5n">
