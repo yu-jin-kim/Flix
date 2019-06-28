@@ -261,10 +261,15 @@
                                     <action selector="backButton:" destination="TuR-QN-U1E" eventType="touchUpInside" id="dfS-MK-tbL"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="8ev-dT-hmn">
+                                <rect key="frame" x="177" y="396" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="8ev-dT-hmn" id="6ep-gT-dnV"/>
                         <outlet property="backButton" destination="udR-7u-vis" id="bAX-OB-JJm"/>
                         <outlet property="webView" destination="bhW-Qi-A9H" id="PId-jq-si1"/>
                     </connections>

@@ -16,6 +16,7 @@
 @interface TrailerViewController ()
 @property (weak, nonatomic) IBOutlet WKWebView *webView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 
 @end
@@ -24,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.activityIndicator startAnimating];
     NSString *baseRequestURL = @"https://api.themoviedb.org/3/movie/";
     NSString *movieID = self.movie[@"id"];
     NSString *firstRequestURL = [baseRequestURL stringByAppendingFormat:@"%@",movieID];
@@ -62,8 +64,11 @@
                                                      cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                                  timeoutInterval:10.0];
             // Load Request into WebView.
+            
             [self.webView loadRequest:request];
         }
+        
+        [self.activityIndicator stopAnimating];
     }];
     [task resume];
 }

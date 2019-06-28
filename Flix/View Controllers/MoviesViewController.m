@@ -106,8 +106,6 @@
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
     NSURLRequest *request = [NSURLRequest requestWithURL:posterURL];
-
-    
     cell.poster.image = nil;
     [cell.poster setImageWithURL:posterURL];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
