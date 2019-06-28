@@ -10,7 +10,6 @@
 #import "MoviesViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
-#import "TrailerViewController.h"
 #import <WebKit/WebKit.h>
 
 @interface TrailerViewController ()
@@ -26,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.activityIndicator startAnimating];
+    //Grab the API database for movie endpoint and create request
     NSString *baseRequestURL = @"https://api.themoviedb.org/3/movie/";
     NSString *movieID = self.movie[@"id"];
     NSString *firstRequestURL = [baseRequestURL stringByAppendingFormat:@"%@",movieID];
@@ -40,7 +40,7 @@
         if (error != nil) {
             NSLog(@"%@", [error localizedDescription]);
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                           message:@"Could not load movies."
+                                                                           message:@"Could not load trailer."
                                                                     preferredStyle:(UIAlertControllerStyleAlert)];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
                                                                style:UIAlertActionStyleDefault
@@ -54,6 +54,7 @@
             }];
         }
         else {
+            //Grab the key from video endpoint and use it to request YouTube URL
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *trailer = dataDictionary[@"results"][0];
             NSString *trailerKey = trailer[@"key"];
@@ -64,7 +65,6 @@
                                                      cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                                  timeoutInterval:10.0];
             // Load Request into WebView.
-            
             [self.webView loadRequest:request];
         }
         
@@ -73,6 +73,7 @@
     [task resume];
 }
 - (IBAction)backButton:(id)sender {
+    //Dismiss modal segue view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

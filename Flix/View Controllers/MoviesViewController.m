@@ -101,13 +101,52 @@
     NSDictionary *movie = self.movies[indexPath.row];
     cell.titleLabel.text = movie[@"title"];
     cell.synopsis.text = movie[@"overview"];
-    NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
+    
+    //Poster table view images fade in (low resolution image first, then high resolution image)
+    NSString *largeURLString = @"https://image.tmdb.org/t/p/w500";
+    NSString *smallURLString = @"https://image.tmdb.org/t/p/w200";
     NSString *posterURLString = movie[@"poster_path"];
-    NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
-    NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:posterURL];
+    NSString *fullLargeURLString = [largeURLString stringByAppendingString:posterURLString];
+    NSString *fullSmallURLString = [smallURLString stringByAppendingString:posterURLString];
+    NSURL *urlLarge = [NSURL URLWithString:fullLargeURLString];
+    NSURL *urlSmall = [NSURL URLWithString:fullSmallURLString];
+    NSURLRequest *requestSmall = [NSURLRequest requestWithURL:urlSmall];
+    NSURLRequest *requestLarge = [NSURLRequest requestWithURL:urlLarge];
+    __weak MovieCell *weakSelf = cell;
     cell.poster.image = nil;
-    [cell.poster setImageWithURL:posterURL];
+    [cell.poster setImageWithURLRequest:requestSmall
+                              placeholderImage:nil
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
+                                           
+                                           // smallImageResponse will be nil if the smallImage is already available
+                                           // in cache (might want to do something smarter in that case).
+                                           weakSelf.poster.alpha = 0.0;
+                                           weakSelf.poster.image = smallImage;
+                                           
+                                           [UIView animateWithDuration:0.3
+                                                            animations:^{
+                                                                
+                                                                weakSelf.poster.alpha = 1.0;
+                                                                
+                                                            } completion:^(BOOL finished) {
+                                                                // The AFNetworking ImageView Category only allows one request to be sent at a time
+                                                                // per ImageView. This code must be in the completion block.
+                                                                [weakSelf.poster setImageWithURLRequest:requestLarge
+                                                                                              placeholderImage:smallImage
+                                                                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage * largeImage) {
+                                                                                                           weakSelf.poster.image = largeImage;
+                                                                                                       }
+                                                                                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                                                                           // do something for the failure condition of the large image request
+                                                                                                           // possibly setting the ImageView's image to a default image
+                                                                                                       }];
+                                                            }];
+                                       }
+                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                           // do something for the failure condition
+                                           // possibly try to get the large image
+                                       }];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
