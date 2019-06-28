@@ -15,14 +15,14 @@ The following **required** functionality is complete:
 
 The following **optional** features are implemented:
 
-- [ ] User sees an error message when there's a networking error.
+- [X] User sees an error message when there's a networking error.
 - [X] Movies are displayed using a CollectionView instead of a TableView.
-- [ ] User can search for a movie.
+- [X] User can search for a movie.
 - [ ] All images fade in as they are loading.
 - [X] User can view the large movie poster by tapping on a cell.
 - [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
 - [X] Customize the selection effect of the cell.
-- [ ] Customize the navigation bar.
+- [X] Customize the navigation bar.
 - [ ] Customize the UI.
 
 The following **additional** features are implemented:
